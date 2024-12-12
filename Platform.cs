@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Platformer
 {
-    internal class Platform
+    public class Platform
     {
+
     }
 }

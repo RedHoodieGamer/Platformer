@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Platformer
 {
-    public class Platform
+    public class Platform :GameObject
     {
 
     }

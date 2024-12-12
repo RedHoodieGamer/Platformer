@@ -14,15 +14,15 @@ namespace Platformer
     public static class AssetManager
     {
         public static Texture2D playerSpriteSheet;
-        public static Texture2D background;
-        public static Texture2D platform;
+        public static Texture2D backgroundTex;
+        public static Texture2D platformTex;
         public static Texture2D spriteSheet;
 
         public static void LoadTextures(ContentManager content)
         {
             playerSpriteSheet = content.Load<Texture2D>("IndianaJones");
-            background = content.Load<Texture2D>("Ground");
-            platform = content.Load<Texture2D>("plattform");
+            backgroundTex = content.Load<Texture2D>("Ground");
+            platformTex = content.Load<Texture2D>("plattform");
             spriteSheet = content.Load<Texture2D>("Sheet_BubbleBobble");
         }
     }

@@ -12,6 +12,14 @@ namespace Platformer
 {
     public class Player : GameObject
     {
+        public Player(Rectangle rec) : base(rec)
+        {
+            this.texture = AssetManager.playerSpriteSheet;
+        }
 
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(texture, size, Color.White);
+        }
     }
 }

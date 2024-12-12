@@ -12,6 +12,14 @@ namespace Platformer
 {
     public class Enemy : GameObject
     {
+        public Enemy(Rectangle rec) : base(rec)
+        {
+            this.texture = AssetManager.spriteSheet;
+        }
 
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(texture, size, Color.White);
+        }
     }
 }

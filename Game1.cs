@@ -1,6 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.IO;
+using System;
+
 
 namespace Platformer
 {
@@ -8,6 +14,11 @@ namespace Platformer
     {
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
+
+        private Player player;
+        private List<Platform> platformList;
+        private List<Enemy> enemyList;
+        private List<GameObject> gameObjectList;
 
         public Game1()
         {
@@ -27,8 +38,33 @@ namespace Platformer
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            AssetManager.LoadTextures(Content);
+            gameObjectList = new List<GameObject>();
+            ReadFromFile("level_1.json");
+
             // TODO: use this.Content to load your game content here
         }
+
+        private void ReadFromFile(string fileName)
+        {
+            Rectangle playerRec = JsonParser.GetRectangle(fileName, "player");
+            player = new Player(playerRec);
+            gameObjectList.Add(player);
+
+            List<Rectangle> platformRecList = JsonParser.GetRecangleList(fileName, "platforms");
+            foreach (Rectangle rec in platformRecList)
+            {
+                Platform platform = new Platform(rec);
+                gameObjectList.Add(platform);
+            }
+            List<Rectangle> enemyRecList = JsonParser.GetRecangleList(fileName, "enemies");
+            foreach (Rectangle rec in enemyRecList)
+            {
+                Enemy enemy = new Enemy(rec);
+                gameObjectList.Add(enemy);
+            }
+        }
+
 
         protected override void Update(GameTime gameTime)
         {
@@ -43,6 +79,14 @@ namespace Platformer
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.DimGray);
+
+            spriteBatch.Begin();
+
+            foreach (GameObject gameObject in gameObjectList)
+            {
+                gameObject.Draw(spriteBatch);
+            }
+            spriteBatch.End();
 
             // TODO: Add your drawing code here
 

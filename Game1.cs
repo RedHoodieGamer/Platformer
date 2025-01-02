@@ -40,7 +40,7 @@ namespace Platformer
 
             AssetManager.LoadTextures(Content);
             gameObjectList = new List<GameObject>();
-            ReadFromFile("level_1.json");
+            ReadFromFile("level1.json");
 
             // TODO: use this.Content to load your game content here
         }

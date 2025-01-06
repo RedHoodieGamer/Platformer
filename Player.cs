@@ -28,7 +28,7 @@ namespace Platformer
             {
                 size.X -= velocity;
             }
-            if (state.IsKeyDown(Keys.D))
+            else if (state.IsKeyDown(Keys.D))
             {
                 size.X += velocity;
             }

@@ -22,6 +22,8 @@ namespace Platformer
 
         public int tileSize = 50;
         public Vector2 gravity = new Vector2(0, 9.82f/ 60);
+        public int playerVel = 10;
+        public int enemyVel = 5;
 
         public Game1()
         {
@@ -51,7 +53,7 @@ namespace Platformer
         private void ReadFromFile(string fileName)
         {
             Rectangle playerRec = JsonParser.GetRectangle(fileName, "player");
-            player = new Player(playerRec);
+            player = new Player(playerRec, playerVel);
             gameObjectList.Add(player);
 
             List<Rectangle> platformRecList = JsonParser.GetRecangleList(fileName, "platforms");
@@ -63,7 +65,7 @@ namespace Platformer
             List<Rectangle> enemyRecList = JsonParser.GetRecangleList(fileName, "enemies");
             foreach (Rectangle rec in enemyRecList)
             {
-                Enemy enemy = new Enemy(rec, new Vector2(5,0));
+                Enemy enemy = new Enemy(rec, enemyVel);
                 gameObjectList.Add(enemy);
             }
         }

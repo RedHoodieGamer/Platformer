@@ -20,6 +20,11 @@ namespace Platformer
             this.velocity = velocity;
         }
 
+        public void Update()
+        {
+
+        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, size, Color.White);

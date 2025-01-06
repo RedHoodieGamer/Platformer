@@ -20,6 +20,8 @@ namespace Platformer
         private List<Enemy> enemyList;
         private List<GameObject> gameObjectList;
 
+        public int tileSize = 50;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -60,7 +62,7 @@ namespace Platformer
             List<Rectangle> enemyRecList = JsonParser.GetRecangleList(fileName, "enemies");
             foreach (Rectangle rec in enemyRecList)
             {
-                Enemy enemy = new Enemy(rec);
+                Enemy enemy = new Enemy(rec, new Vector2(5,0));
                 gameObjectList.Add(enemy);
             }
         }

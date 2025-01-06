@@ -12,9 +12,26 @@ namespace Platformer
 {
     public class Player : GameObject
     {
-        public Player(Rectangle rec) : base(rec)
+        private int velocity;
+
+        public Player(Rectangle rec, int velocity) : base(rec)
         {
             this.texture = AssetManager.playerSpriteSheet;
+            this.velocity = velocity;
+        }
+
+        public void Update()
+        {
+            KeyboardState state = Keyboard.GetState();
+
+            if (state.IsKeyDown(Keys.A))
+            {
+                size.X -= velocity;
+            }
+            if (state.IsKeyDown(Keys.D))
+            {
+                size.X += velocity;
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)

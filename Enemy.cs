@@ -12,9 +12,12 @@ namespace Platformer
 {
     public class Enemy : GameObject
     {
-        public Enemy(Rectangle rec) : base(rec)
+        public Vector2 velocity;
+
+        public Enemy(Rectangle rec, Vector2 velocity) : base(rec)
         {
             this.texture = AssetManager.spriteSheet;
+            this.velocity = velocity;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

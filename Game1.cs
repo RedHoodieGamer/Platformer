@@ -21,6 +21,7 @@ namespace Platformer
         private List<GameObject> gameObjectList;
 
         public int tileSize = 50;
+        public Vector2 gravity = new Vector2(0, 9.82f/ 60);
 
         public Game1()
         {

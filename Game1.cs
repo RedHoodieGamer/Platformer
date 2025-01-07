@@ -22,7 +22,7 @@ namespace Platformer
         public CollisionManager collisionManager;
         public EnemyManager enemyManager;
 
-        public float gravity = 9.82f/ 6;
+        public float gravity = 9.82f / 6;
         public int playerVel = 5;
         public int enemyVel = 2;
 

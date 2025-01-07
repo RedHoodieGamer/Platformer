@@ -22,10 +22,9 @@ namespace Platformer
         public CollisionManager collisionManager;
         public EnemyManager enemyManager;
 
-        public int tileSize = 50;
         public float gravity = 9.82f/ 60;
-        public int playerVel = 10;
-        public int enemyVel = 5;
+        public int playerVel = 5;
+        public int enemyVel = 2;
 
         public Game1()
         {
@@ -89,7 +88,7 @@ namespace Platformer
             collisionManager.EnemySafety(enemyList);
             //collisionManager.IsEnemyFalling(enemyList);
             enemyManager.Update();
-            player.Update();
+            player.Update(gameTime);
 
             // TODO: Add your update logic here
 

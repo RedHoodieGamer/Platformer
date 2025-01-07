@@ -55,7 +55,7 @@ namespace Platformer
             }
             if (KeyMouseReader.KeyPressed(Keys.W) && !isPlayerFalling)
             {
-                size.Y -= velocity * 10;
+                size.Y -= velocity * 12;
             }
 
             frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;

@@ -21,10 +21,13 @@ namespace Platformer
         private List<GameObject> gameObjectList;
         public CollisionManager collisionManager;
         public EnemyManager enemyManager;
+        public enum GameSate { Gameplay = 1, GameOver = 2 }
+        public GameSate gameSate = GameSate.Gameplay;
+        public bool gameOver;
 
         public float gravity = 9.82f / 6;
         public int playerVel = 5;
-        public int enemyVel = 2;
+        public int enemyVel = 1;
 
         public Game1()
         {
@@ -51,6 +54,7 @@ namespace Platformer
             ReadFromFile("level1.json");
             collisionManager = new CollisionManager(platformList);
             enemyManager = new EnemyManager(enemyList);
+            gameOver = false;
             
 
             // TODO: use this.Content to load your game content here
@@ -72,24 +76,46 @@ namespace Platformer
             List<Rectangle> enemyRecList = JsonParser.GetRecangleList(fileName, "enemies");
             foreach (Rectangle rec in enemyRecList)
             {
-                Enemy enemy = new Enemy(rec, enemyVel, gravity);
+                Enemy enemy = new Enemy(rec, enemyVel);
                 gameObjectList.Add(enemy);
                 enemyList.Add(enemy);
             }
         }
 
+        public void PlayerDeath()
+        {
+            for (int i = 0; i < enemyList.Count; i++)
+            {
+                if (player.Size.Intersects(enemyList[i].Size))
+                {
+                    gameSate = GameSate.GameOver;
+                }
+            }
+        }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            collisionManager.IsPlayerFalling(player);
-            collisionManager.EnemySafety(enemyList);
-            //collisionManager.IsEnemyFalling(enemyList);
-            enemyManager.Update(gameTime);
-            player.Update(gameTime);
-
+            if (gameSate == GameSate.Gameplay)
+            {
+                collisionManager.IsPlayerFalling(player);
+                collisionManager.EnemySafety(enemyList);
+                //collisionManager.PlayerDeath(enemyList, player);
+                enemyManager.Update(gameTime);
+                player.Update(gameTime);
+                PlayerDeath();
+                
+            }
+            else if (gameSate == GameSate.GameOver)
+            {
+                gameObjectList.Clear();
+                platformList.Clear();
+                enemyList.Clear();
+                ReadFromFile("level1.json");
+                gameSate = GameSate.Gameplay;
+            }
             // TODO: Add your update logic here
 
             base.Update(gameTime);

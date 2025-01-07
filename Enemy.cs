@@ -14,8 +14,6 @@ namespace Platformer
     public class Enemy : GameObject
     {
         public int velocity;
-        //public bool isEnemyFalling;
-        private float gravity;
         private int frame;
         private double frameTimer, frameInterval;
         private int texTileSize = 38;
@@ -24,11 +22,10 @@ namespace Platformer
         public enum Moving { Left = 1, Right = 2 };
         public Moving moving = Moving.Left;
 
-        public Enemy(Rectangle rec, int velocity, float gravity) : base(rec)
+        public Enemy(Rectangle rec, int velocity) : base(rec)
         {
             this.texture = AssetManager.spriteSheet;
             this.velocity = velocity;
-            this.gravity = gravity;
             size.Y += 1;
 
             srcRec = new Rectangle(0, 4 * texTileSize, texTileSize, texTileSize);
@@ -39,9 +36,6 @@ namespace Platformer
 
         public void Update(GameTime gameTime)
         {
-            //if (isEnemyFalling)
-            //    size.Y += (int)gravity;
-
             if(moving == Moving.Left)
             {
                 size.X -= velocity;
@@ -63,7 +57,7 @@ namespace Platformer
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, size, srcRec, Color.White, 0, new Vector2(), spriteEffects, 1);
+            spriteBatch.Draw(texture, size, srcRec, Color.White, 0, new Vector2(), spriteEffects, 0);
         }
     }
 }

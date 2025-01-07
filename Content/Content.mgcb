@@ -37,6 +37,9 @@
 /processorParam:TextureFormat=Color
 /build:IndianaJones.png
 
+#begin level1.json
+/copy:level1.json
+
 #begin plattform.bmp
 /importer:TextureImporter
 /processor:TextureProcessor

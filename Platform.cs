@@ -16,7 +16,6 @@ namespace Platformer
         {
             this.texture = AssetManager.platformTex;
         }
-
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, size, Color.SteelBlue);

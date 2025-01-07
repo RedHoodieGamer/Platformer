@@ -29,6 +29,7 @@ namespace Platformer
             this.texture = AssetManager.spriteSheet;
             this.velocity = velocity;
             this.gravity = gravity;
+            size.Y += 1;
 
             srcRec = new Rectangle(0, 4 * texTileSize, texTileSize, texTileSize);
             frameTimer = 100;
@@ -43,12 +44,12 @@ namespace Platformer
 
             if(moving == Moving.Left)
             {
-                //size.X -= velocity;
+                size.X -= velocity;
                 spriteEffects = SpriteEffects.None;
             }
             else if(moving == Moving.Right)
             {
-                //size.X += velocity;
+                size.X += velocity;
                 spriteEffects = SpriteEffects.FlipHorizontally;
             }
 

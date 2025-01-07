@@ -44,6 +44,10 @@ namespace Platformer
                         {
                             enemies[i].moving = Enemy.Moving.Right;
                         }
+                        else if(enemies[i].Size.X + enemies[i].Size.Width >= platformsList[j].Size.X + platformsList[j].Size.Width)
+                        {
+                            enemies[i].moving = Enemy.Moving.Left;
+                        }
                     }
                 }
             }

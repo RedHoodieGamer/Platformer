@@ -82,6 +82,7 @@ namespace Platformer
                 Exit();
 
             enemyManager.Update();
+            player.Update();
 
             // TODO: Add your update logic here
 

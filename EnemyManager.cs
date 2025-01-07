@@ -20,7 +20,7 @@ namespace Platformer
         {
             foreach (Enemy enemy in enemies)
             {
-
+                enemy.Update();
             }
         }
 

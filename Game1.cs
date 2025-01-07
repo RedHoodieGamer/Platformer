@@ -19,9 +19,11 @@ namespace Platformer
         private List<Platform> platformList;
         private List<Enemy> enemyList;
         private List<GameObject> gameObjectList;
+        public CollisionManager collisionManager;
+        public EnemyManager enemyManager;
 
         public int tileSize = 50;
-        public Vector2 gravity = new Vector2(0, 9.82f/ 60);
+        public float gravity = 9.82f/ 60;
         public int playerVel = 10;
         public int enemyVel = 5;
 
@@ -46,6 +48,9 @@ namespace Platformer
             AssetManager.LoadTextures(Content);
             gameObjectList = new List<GameObject>();
             ReadFromFile("level1.json");
+            collisionManager = new CollisionManager(platformList);
+            enemyManager = new EnemyManager(enemyList);
+            
 
             // TODO: use this.Content to load your game content here
         }
@@ -53,7 +58,7 @@ namespace Platformer
         private void ReadFromFile(string fileName)
         {
             Rectangle playerRec = JsonParser.GetRectangle(fileName, "player");
-            player = new Player(playerRec, playerVel);
+            player = new Player(playerRec, playerVel, gravity);
             gameObjectList.Add(player);
 
             List<Rectangle> platformRecList = JsonParser.GetRecangleList(fileName, "platforms");
@@ -65,7 +70,7 @@ namespace Platformer
             List<Rectangle> enemyRecList = JsonParser.GetRecangleList(fileName, "enemies");
             foreach (Rectangle rec in enemyRecList)
             {
-                Enemy enemy = new Enemy(rec, enemyVel);
+                Enemy enemy = new Enemy(rec, enemyVel, gravity);
                 gameObjectList.Add(enemy);
             }
         }
@@ -75,6 +80,8 @@ namespace Platformer
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
+            enemyManager.Update();
 
             // TODO: Add your update logic here
 

@@ -13,16 +13,20 @@ namespace Platformer
     public class Enemy : GameObject
     {
         public int velocity;
+        private bool isFalling;
+        private float gravity;
 
-        public Enemy(Rectangle rec, int velocity) : base(rec)
+        public Enemy(Rectangle rec, int velocity, float gravity) : base(rec)
         {
             this.texture = AssetManager.spriteSheet;
             this.velocity = velocity;
+            this.gravity = gravity;
         }
 
         public void Update()
         {
-
+            if (isFalling)
+                size.Y += (int)gravity;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

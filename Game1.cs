@@ -24,8 +24,9 @@ namespace Platformer
         public enum GameSate { Gameplay = 1, GameOver = 2 }
         public GameSate gameSate = GameSate.Gameplay;
         public bool gameOver;
+        private Rectangle finalRec;
 
-        public float gravity = 9.82f / 6;
+        public float gravity = 9.82f / 4;
         public int playerVel = 5;
         public int enemyVel = 1;
 
@@ -56,6 +57,8 @@ namespace Platformer
             collisionManager = new CollisionManager(platformList);
             enemyManager = new EnemyManager(enemyList);
             gameOver = false;
+            finalRec = new Rectangle();
+            
 
 
             // TODO: use this.Content to load your game content here
@@ -66,6 +69,9 @@ namespace Platformer
             Rectangle playerRec = JsonParser.GetRectangle(fileName, "player");
             player = new Player(playerRec, playerVel, gravity);
             gameObjectList.Add(player);
+
+            Rectangle winRec = JsonParser.GetRectangle(fileName, "win");
+            finalRec = winRec;
 
             List<Rectangle> platformRecList = JsonParser.GetRecangleList(fileName, "platforms");
             foreach (Rectangle rec in platformRecList)
@@ -94,7 +100,13 @@ namespace Platformer
             }
         }
 
-        
+        public void Win()
+        {
+            if (player.Size.Intersects(finalRec))
+            {
+                gameSate = GameSate.GameOver;
+            }
+        }
 
         protected override void Update(GameTime gameTime)
         {
@@ -109,6 +121,7 @@ namespace Platformer
                 enemyManager.Update(gameTime);
                 player.Update(gameTime);
                 PlayerDeath();
+                Win();
                 
             }
             else if (gameSate == GameSate.GameOver)

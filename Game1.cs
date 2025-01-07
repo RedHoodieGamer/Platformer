@@ -29,6 +29,7 @@ namespace Platformer
         public int playerVel = 5;
         public int enemyVel = 1;
 
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -55,7 +56,7 @@ namespace Platformer
             collisionManager = new CollisionManager(platformList);
             enemyManager = new EnemyManager(enemyList);
             gameOver = false;
-            
+
 
             // TODO: use this.Content to load your game content here
         }
@@ -92,6 +93,8 @@ namespace Platformer
                 }
             }
         }
+
+        
 
         protected override void Update(GameTime gameTime)
         {

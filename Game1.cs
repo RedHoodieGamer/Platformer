@@ -81,6 +81,8 @@ namespace Platformer
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            collisionManager.IsPlayerFalling(player);
+            //collisionManager.IsEnemyFalling(enemyList);
             enemyManager.Update();
             player.Update();
 

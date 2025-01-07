@@ -13,7 +13,7 @@ namespace Platformer
     public class CollisionManager
     {
         private List<Platform> platformsList;
-        public bool isFalling;
+        
         public CollisionManager(List<Platform> platforms)
         {
             platformsList = new List<Platform>();
@@ -22,16 +22,24 @@ namespace Platformer
 
         public bool IsPlayerFalling(Player player)
         {
-            if (isFalling == false)
-                return true;
-            else return false;
+            for (int i = 0; i < platformsList.Count; i++)
+            {
+                if (player.Size.Intersects(platformsList[i].Size))
+                {
+                    return player.isPlayerFalling = true;
+                }
+                else return player.isPlayerFalling = false;
+            }
         }
 
-        public bool IsEnemyFalling(List<Enemy> enemies)
-        {
-            if (isFalling == false)
-                return true;
-            else return false;
-        }
+        
+
+        //public bool IsEnemyFalling(List<Enemy> enemies)
+        //{
+        //    for (int i = 0; i < enemies.Count; i++)
+        //    {
+        //        enemies[i].isEnemyFalling = true;
+        //    }
+        //}
     }
 }

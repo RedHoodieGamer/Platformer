@@ -22,14 +22,17 @@ namespace Platformer
 
         public void IsPlayerFalling(Player player)
         {
+            bool isOnPlatform = false;
+
             for (int i = 0; i < platformsList.Count; i++)
             {
-                if (player.Size.Intersects(platformsList[i].Size))
+                if (platformsList[i].Size.Intersects(player.Size))
                 {
-                    player.isPlayerFalling = true;
+                    isOnPlatform = true;
+                    break;
                 }
-                else player.isPlayerFalling = false;
             }
+            player.isPlayerFalling = !isOnPlatform;
         }
 
         public void EnemySafety(List<Enemy> enemies)
@@ -52,14 +55,5 @@ namespace Platformer
                 }
             }
         }
-        
-
-        //public bool IsEnemyFalling(List<Enemy> enemies)
-        //{
-        //    for (int i = 0; i < enemies.Count; i++)
-        //    {
-        //        enemies[i].isEnemyFalling = true;
-        //    }
-        //}
     }
 }

@@ -28,7 +28,7 @@ namespace Platformer
             this.velocity = velocity;
             this.gravity = gravity;
 
-            isPlayerFalling = true;
+            isPlayerFalling = false;
             srcRec = new Rectangle(0, 0, texTileSize, texTileSize);
             frameTimer = 100;
             frameInterval = 100;
@@ -38,6 +38,7 @@ namespace Platformer
         public void Update(GameTime gameTime)
         {
             KeyboardState state = Keyboard.GetState();
+            KeyMouseReader.Update();
 
             if (isPlayerFalling)
                 size.Y += (int)gravity;
@@ -51,6 +52,10 @@ namespace Platformer
             {
                 size.X += velocity;
                 spriteEffects = SpriteEffects.FlipHorizontally;
+            }
+            if (KeyMouseReader.KeyPressed(Keys.W) && !isPlayerFalling)
+            {
+                size.Y -= velocity * 10;
             }
 
             frameTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;

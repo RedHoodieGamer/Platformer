@@ -19,7 +19,7 @@ namespace Platformer
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, size, Color.Black);
+            spriteBatch.Draw(texture, size, Color.SteelBlue);
         }
     }
 }

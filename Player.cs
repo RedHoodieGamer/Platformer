@@ -28,6 +28,7 @@ namespace Platformer
             this.velocity = velocity;
             this.gravity = gravity;
 
+            isPlayerFalling = true;
             srcRec = new Rectangle(0, 0, texTileSize, texTileSize);
             frameTimer = 100;
             frameInterval = 100;

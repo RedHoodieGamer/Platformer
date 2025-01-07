@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -16,11 +17,11 @@ namespace Platformer
             enemies = enemy;
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             foreach (Enemy enemy in enemies)
             {
-                enemy.Update();
+                enemy.Update(gameTime);
             }
         }
 

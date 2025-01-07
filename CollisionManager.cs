@@ -40,9 +40,9 @@ namespace Platformer
                 {
                     if (enemies[i].Size.Intersects(platformsList[j].Size))
                     {
-                        if (enemies[i].Size.X <= platformsList[j].Size.X || enemies[i].Size.X + enemies[i].Size.Width >= platformsList[j].Size.X + platformsList[j].Size.Width)
+                        if (enemies[i].Size.X <= platformsList[j].Size.X)
                         {
-                            enemies[i].velocity = enemies[i].velocity * -1;
+                            enemies[i].moving = Enemy.Moving.Right;
                         }
                     }
                 }

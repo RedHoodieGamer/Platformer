@@ -87,7 +87,7 @@ namespace Platformer
             collisionManager.IsPlayerFalling(player);
             collisionManager.EnemySafety(enemyList);
             //collisionManager.IsEnemyFalling(enemyList);
-            enemyManager.Update();
+            enemyManager.Update(gameTime);
             player.Update(gameTime);
 
             // TODO: Add your update logic here

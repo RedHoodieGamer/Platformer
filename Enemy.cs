@@ -13,7 +13,7 @@ namespace Platformer
     public class Enemy : GameObject
     {
         public int velocity;
-        public bool isEnemyFalling;
+        //public bool isEnemyFalling;
         private float gravity;
 
 
@@ -26,8 +26,10 @@ namespace Platformer
 
         public void Update()
         {
-            if (isEnemyFalling)
-                size.Y += (int)gravity;
+            //if (isEnemyFalling)
+            //    size.Y += (int)gravity;
+
+            size.X += velocity;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

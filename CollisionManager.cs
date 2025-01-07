@@ -20,18 +20,34 @@ namespace Platformer
             platformsList = platforms;
         }
 
-        public bool IsPlayerFalling(Player player)
+        public void IsPlayerFalling(Player player)
         {
             for (int i = 0; i < platformsList.Count; i++)
             {
                 if (player.Size.Intersects(platformsList[i].Size))
                 {
-                    return player.isPlayerFalling = true;
+                    player.isPlayerFalling = true;
                 }
-                else return player.isPlayerFalling = false;
+                else player.isPlayerFalling = false;
             }
         }
 
+        public void EnemySafety(List<Enemy> enemies)
+        {
+            for(int i = 0;i < enemies.Count; i++)
+            {
+                for(int j = 0; j < platformsList.Count; j++)
+                {
+                    if (enemies[i].Size.Intersects(platformsList[j].Size))
+                    {
+                        if (enemies[i].Size.X <= platformsList[j].Size.X || enemies[i].Size.X + enemies[i].Size.Width >= platformsList[j].Size.X + platformsList[j].Size.Width)
+                        {
+                            enemies[i].velocity = enemies[i].velocity * -1;
+                        }
+                    }
+                }
+            }
+        }
         
 
         //public bool IsEnemyFalling(List<Enemy> enemies)

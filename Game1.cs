@@ -47,6 +47,8 @@ namespace Platformer
 
             AssetManager.LoadTextures(Content);
             gameObjectList = new List<GameObject>();
+            platformList = new List<Platform>();
+            enemyList = new List<Enemy>();
             ReadFromFile("level1.json");
             collisionManager = new CollisionManager(platformList);
             enemyManager = new EnemyManager(enemyList);
@@ -66,12 +68,14 @@ namespace Platformer
             {
                 Platform platform = new Platform(rec);
                 gameObjectList.Add(platform);
+                platformList.Add(platform);
             }
             List<Rectangle> enemyRecList = JsonParser.GetRecangleList(fileName, "enemies");
             foreach (Rectangle rec in enemyRecList)
             {
                 Enemy enemy = new Enemy(rec, enemyVel, gravity);
                 gameObjectList.Add(enemy);
+                enemyList.Add(enemy);
             }
         }
 
@@ -82,6 +86,7 @@ namespace Platformer
                 Exit();
 
             collisionManager.IsPlayerFalling(player);
+            collisionManager.EnemySafety(enemyList);
             //collisionManager.IsEnemyFalling(enemyList);
             enemyManager.Update();
             player.Update();

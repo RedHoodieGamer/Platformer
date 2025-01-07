@@ -30,6 +30,7 @@ namespace Platformer
 
             if (isPlayerFalling)
                 size.Y += (int)gravity;
+            
             if (state.IsKeyDown(Keys.A))
             {
                 size.X -= velocity;

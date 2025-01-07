@@ -13,8 +13,9 @@ namespace Platformer
     public class Player : GameObject
     {
         private int velocity;
-        private bool isFalling;
+        public bool isPlayerFalling;
         private float gravity;
+
 
         public Player(Rectangle rec, int velocity, float gravity) : base(rec)
         {
@@ -27,7 +28,7 @@ namespace Platformer
         {
             KeyboardState state = Keyboard.GetState();
 
-            if (isFalling)
+            if (isPlayerFalling)
                 size.Y += (int)gravity;
             if (state.IsKeyDown(Keys.A))
             {

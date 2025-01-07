@@ -13,8 +13,9 @@ namespace Platformer
     public class Enemy : GameObject
     {
         public int velocity;
-        private bool isFalling;
+        public bool isEnemyFalling;
         private float gravity;
+
 
         public Enemy(Rectangle rec, int velocity, float gravity) : base(rec)
         {
@@ -25,7 +26,7 @@ namespace Platformer
 
         public void Update()
         {
-            if (isFalling)
+            if (isEnemyFalling)
                 size.Y += (int)gravity;
         }
 
